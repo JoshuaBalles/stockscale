@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}StockScale - Home{% endblock %}
+
+{% block content %}
+    <!-- Title -->
+    <div class="row justify-content-center mt-5">
+        <h1>StockScale</h1>
+    </div>
+    <!-- Video Feed Container -->
+    <div class="row justify-content-center mt-3">
+        <div id="vf-container">
+            <video id="webcam" width="800" height="600" autoplay></video>
+        </div>
+    </div>
+    <!-- Capture Button -->
+    <div class="row justify-content-center mt-3">
+        <button type="button" class="btn btn-primary">Capture</button>
+    </div>
+    <!-- JavaScript for webcam integration -->
+    <script>
+        const video = document.getElementById('webcam');
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                })
+                .catch(function(error) {
+                    console.error('Error accessing webcam:', error);
+                });
+        } else {
+            console.error('Webcam access is not supported.');
+        }
+    </script>
+{% endblock %}
